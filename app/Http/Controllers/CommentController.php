@@ -10,15 +10,18 @@ class CommentController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, $postId)
+    public function __invoke(Request $request)
     {
-       
-        $accessToken = ENV('REDDIT_TOKEN');
-        $response = Http::withToken($accessToken)->post("https://oauth.reddit.com/api/comment", [
-            'thing_id' => "t3_$postId",
-            'text' => $request->text,
-        ]);
+        $accessToken = env('REDDIT_TOKEN');
+        $userAgent = env('EDDIT_USER_NAME');
 
-        return $response;
+        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $accessToken,
+            'User-Agent' => 'ChangeMeClient/0.1 by ' .$userAgent
+            ])->post('https://oauth.reddit.com/api/comment', [
+            
+                'thing_id' => "t3_$request->thing_id",
+                'text' => $request->text]);
+
+        return $response->json();
     }
 }
