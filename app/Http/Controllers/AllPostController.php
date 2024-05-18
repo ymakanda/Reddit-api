@@ -12,12 +12,16 @@ class AllPostController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $response = Http::get("https://www.reddit.com/r/$request->subreddit");
+        $accessToken = env('REDDIT_TOKEN');
+        $userAgent = env('EDDIT_USER_NAME');
+        $response = Http::withHeaders(['Authorization' => 'Bearer ' . $accessToken,
+            'User-Agent' => 'ChangeMeClient/0.1 by ' .$userAgent
+            ])->get("https://oauth.reddit.com/user/self/submitted");
 
         if ($response->ok()) {
             return $response->json();
         } else {
-            return response()->json(['error' => 'Failed to fetch data from Reddit API'], $response->status());
+            return response()->json(['error' => 'Failed to fetch data from Reddit API']);
         }
     }
 }
