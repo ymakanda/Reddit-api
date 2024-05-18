@@ -18,6 +18,14 @@ Clone the repository locally
 - Install composer
 - copy from .example to new  `.env` file:
 
+AWS url = http://testredit-env.eba-ydmv2gft.us-east-2.elasticbeanstalk.com
+
+To thest the apis you need to append something like 
+```bash
+     http://testredit-env.eba-ydmv2gft.us-east-2.elasticbeanstalk.com/api/all-post 
+
+     http://localhost:8080/api/search-post-user/{username}
+```
 ## To run it 
 
 ```bash
