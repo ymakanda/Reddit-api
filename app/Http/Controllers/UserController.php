@@ -22,7 +22,7 @@ class UserController extends Controller
         $user = Auth::user();
       
         $token = $user->createToken('example')->accessToken;
-        dd($token);
+        
         return Response(['status' => 200,'token' => $token],200);
     }
 
