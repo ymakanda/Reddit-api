@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\{ CreatePostController, UpdatePostController, DeletePostController,
     VoteCommentController, VotePostController, CommentController, AllMyPostController,
-    SearchPostByUserController, AllPostController };
+    SearchPostByUserController, AllPostController, GetPostDetailsController };
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +35,4 @@ Route::post('/comment', CommentController::class);
 Route::get('/all-my-post/{username}', AllMyPostController::class);
 Route::get('/all-post', AllPostController::class);
 Route::get('/search-post-user/{username}', SearchPostByUserController::class);
+Route::get('/post/{postId}', GetPostDetailsController::class);
